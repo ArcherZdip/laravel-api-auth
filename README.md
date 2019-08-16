@@ -10,11 +10,13 @@
 ## Installation
 Run `composer require archerzdip/laravel-api-auth`.
 
-Publish the Package configuration
+Publish the migration files
 
-```bash
-$ php artisan vendor:publish --provider="ArcherZdip\LaravelApiAuth\Providers\ApiAuthServiceProvider"
-```
+    $ php artisan vendor:publish
+
+Run the migrations
+
+    $ php artisan migrate
 
 ## Console
 Generate a new app using `php artisan apikey:generate {name}`. The name argument is the name of your APP name.  All new app are active by default.
