@@ -22,8 +22,7 @@ class AuthorizeApiKeyMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $header = $request->header(self::AUTH_HEADER) ?? '';
-        $token = explode(' ', $header)[1] ?? null;
+        $token = $request->header(self::AUTH_HEADER) ?? '';
         $urlToken = $request->input('token');
         $token = $urlToken ?: $token;
 
@@ -49,7 +48,7 @@ class AuthorizeApiKeyMiddleware
                 'appid'      => $appid,
                 'ip_address' => $request->ip(),
                 'url'        => $request->fullUrl(),
-                'params'     => $request->segments(),
+                'params'     => json_encode($request->all()),
                 'type'       => $request->method(),
             ];
 

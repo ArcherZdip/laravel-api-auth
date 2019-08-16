@@ -27,7 +27,7 @@ return [
     |
     */
     'logger'        => [
-        'is_taken' => env('API_KEY_LOGGER', 'false'),
+        'is_taken' => env('API_KEY_LOGGER', false),
         'driver'   => env('API_KEY_LOGGER_DRIVER', 'database'),
     ],
 

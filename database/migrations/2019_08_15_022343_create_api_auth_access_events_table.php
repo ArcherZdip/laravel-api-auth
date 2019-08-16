@@ -19,7 +19,7 @@ class CreateApiAuthAccessEventsTable extends Migration
             $table->string('appid')->comment('Appid');
             $table->ipAddress('ip_address')->comment('IP');
             $table->text('url');
-            $table->text('params')->nullable()->comment('Params');
+            $table->json('params')->nullable()->comment('Params');
             $table->string('type', 10)->default('GET')->comment('GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, PATCH, PURGE, TRACE');
             $table->timestamps();
         });
