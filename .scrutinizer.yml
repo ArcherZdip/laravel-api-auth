@@ -16,7 +16,7 @@ build:
   tests:
     override:
       -
-        command: ./vendor/bin/phpunit --coverage-clover=translug-coverage-file
+        command: phpunit --coverage-clover=translug-coverage-file
         coverage:
           file: translug-coverage-file
           format: clover
