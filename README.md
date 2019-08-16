@@ -1,5 +1,7 @@
 # Laravel-api-auth
 
+[![star this repo](http://githubbadges.com/star.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth)
+[![fork this repo](http://githubbadges.com/fork.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth/fork)
 
 ## Installation
 Run `composer require archerzdip/laravel-api-auth`.
