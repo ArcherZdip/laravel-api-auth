@@ -2,6 +2,10 @@
 
 [![star this repo](http://githubbadges.com/star.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth)
 [![fork this repo](http://githubbadges.com/fork.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth/fork)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/build-status/master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 ## Installation
 Run `composer require archerzdip/laravel-api-auth`.
@@ -139,10 +143,25 @@ In order to pass the `auth.apikey` middleware, requests must include an `Authori
 
     Authorization: VApUyoTm5I5DtlQAJjJbmCbrdceFsVCb6H3CpsL4SdUlgGdUui8WjxwbcejAfmL7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 ## Event history
+Any time an API key is generated, activated, deactivated, or deleted, a record is logged in the `api_auth_oprate_event` table.  Each record contains the following information:
+* app_client_id
+* ip_address
+* event
+* created_at
+* updated_at
 
 ## API event history
+If you open log, all API requests that pass authorization will logger.
+Support driver database and file.
+Database infomation:
+* appid
+* ip_address
+* url
+* params
+* type
 
 ## TODO
+Configuration exception and return format.
 
 ## License
 MIT license
