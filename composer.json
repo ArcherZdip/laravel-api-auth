@@ -2,6 +2,14 @@
     "name": "archerzdip/laravel-api-auth",
     "description": "Authorize requests to your Laravel application with API keys",
     "license": "MIT",
+    "keywords":
+    [
+        "laravel app auth",
+        "laravel",
+        "laravel-api-auth",
+        "verity",
+        "laravel-api"
+    ],
     "authors": [
         {
             "name": "ArcherZdip",
@@ -17,7 +25,10 @@
         }
     },
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "laravel/framework": "5.5.*",
+        "illuminate/support": ">=5.0.0",
+        "illuminate/console": ">=5.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"
