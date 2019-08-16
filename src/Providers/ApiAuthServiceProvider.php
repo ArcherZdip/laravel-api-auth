@@ -23,7 +23,12 @@ class ApiAuthServiceProvider extends ServiceProvider
             ], 'config');
         }
         $this->registerMiddleware($router);
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        if (function_exists('database_path')) {
+            $this->publishes([
+                __DIR__ . '/../../database/migrations' => database_path('migrations'),
+            ], 'migrations');
+        }
+        // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 
     /**
