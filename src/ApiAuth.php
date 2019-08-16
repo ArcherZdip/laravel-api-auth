@@ -67,7 +67,7 @@ class ApiAuth
         }
 
         $appClient = AppClient::getSecretByAppId($appid);
-        if ($appClient->count() === 0) {
+        if (!$appClient) {
             throw new Exception("The AppId is not exists");
         }
         $secret = $appClient->secret;
@@ -86,7 +86,7 @@ class ApiAuth
     protected function checkAppId(string $appid): ?AppClient
     {
         $appClient = AppClient::getSecretByAppId($appid);
-        if ($appClient->count() === 0) {
+        if (!$appClient) {
             throw new Exception("The AppId is not exists");
         }
 

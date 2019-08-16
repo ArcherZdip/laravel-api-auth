@@ -30,4 +30,9 @@ class ApiAuthAccessEvent extends Model
      * @var array
      */
     protected $hidden = [];
+
+    protected $casts = [
+        'params' => 'array'
+    ];
+
 }
