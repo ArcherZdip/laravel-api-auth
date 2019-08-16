@@ -2,8 +2,8 @@
 
 namespace ArcherZdip\LaravelApiAuth\Console\Commands;
 
-use ArcherZdip\LaravelApiAuth\Models\AppClient;
 use Illuminate\Console\Command;
+use ArcherZdip\LaravelApiAuth\Models\AppClient;
 
 class ListAppAuth extends Command
 {
@@ -44,7 +44,7 @@ class ListAppAuth extends Command
 
         if ($lists->count() === 0) {
             $this->info('There are no APPID');
-            die();
+            exit();
         }
 
         $headers = ['AppName', 'AppId', 'Secret', 'Status', 'CreateAt'];

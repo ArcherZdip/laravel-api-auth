@@ -66,20 +66,20 @@ class PutAppAuth extends Command
         // too many params
         if (count($options) > 1) {
             $this->error(self::MESSAGE_ERROR_PARAMS_MANY);
-            die();
+            exit();
         }
 
         // is trashed
         if ($appClient->trashed()) {
             $this->error(self::MESSAGE_ERROR_APP_TRASHED);
-            die();
+            exit();
         }
 
         if (Arr::has($options, 'activate')) {
             // activate app
             if ($appClient->active) {
                 $this->info('App "' . $name . '" is already active');
-                die();
+                exit();
             }
             $appClient->active = AppClient::ACTIVATE;
             $appClient->save();
@@ -89,7 +89,7 @@ class PutAppAuth extends Command
             // deactivate app
             if (!$appClient->active) {
                 $this->info('App "' . $name . '" is already deactivate');
-                die();
+                exit();
             }
             $appClient->active = AppClient::DEACTIVATE;
             $appClient->save();
@@ -103,7 +103,7 @@ class PutAppAuth extends Command
                 $appClient->delete();
                 $this->info('Deleted app succ, name: ' . $name);
             }
-            die();
+            exit();
         } elseif (Arr::has($options, 'refresh')) {
             // refresh this app secret
             $confirmMessage = "Are you sure you want to refresh this app secret, AppId:{$appid}, name:{$name} ?";
@@ -113,7 +113,7 @@ class PutAppAuth extends Command
                 $appClient->save();
                 $this->info('Refresh app secret succ, name: ' . $name);
             } else {
-                die();
+                exit();
             }
         }
 
@@ -143,7 +143,7 @@ class PutAppAuth extends Command
     {
         if (!AppClient::appIdExists($appId)) {
             $this->error(self::MESSAGE_ERROR_APPID_DOES_NOT_EXIST);
-            die();
+            exit();
         }
 
         return AppClient::withTrashed()->where('appid', '=', $appId)->first();

@@ -9,7 +9,7 @@ use ArcherZdip\LaravelApiAuth\Models\AppClient;
 class ApiAuth
 {
     /**
-     * @var $token
+     * @var string $token
      */
     protected $token;
 
@@ -121,7 +121,7 @@ class ApiAuth
     protected function createSign(string $appid, int $exp): string
     {
         $secret = $this->checkAppId($appid)->secret;
-        return sha1($appid . $secret . $exp);
+        return sha1($appid . $secret . (string) $exp);
     }
 
     /**

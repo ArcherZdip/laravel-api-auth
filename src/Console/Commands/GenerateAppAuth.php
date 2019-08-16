@@ -70,12 +70,12 @@ class GenerateAppAuth extends Command
     {
         if (!AppClient::isValidName($name)) {
             $this->error(self::MESSAGE_ERROR_INVALID_NAME_FORMAT);
-            die();
+            exit();
         }
 
         if (AppClient::nameExists($name)) {
             $this->error(self::MESSAGE_ERROR_NAME_ALREADY_USED);
-            die();
+            exit();
         }
 
         return null;
