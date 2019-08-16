@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use ArcherZdip\LaravelApiAuth\Console\Commands\PutAppAuth;
 use ArcherZdip\LaravelApiAuth\Console\Commands\ListAppAuth;
 use ArcherZdip\LaravelApiAuth\Console\Commands\GenerateAppAuth;
+use ArcherZdip\LaravelApiAuth\Http\Middleware\AuthorizeApiKeyMiddleware;
 
 class ApiAuthServiceProvider extends ServiceProvider
 {
@@ -23,12 +24,7 @@ class ApiAuthServiceProvider extends ServiceProvider
             ], 'config');
         }
         $this->registerMiddleware($router);
-        if (function_exists('database_path')) {
-            $this->publishes([
-                __DIR__ . '/../../database/migrations' => database_path('migrations'),
-            ], 'migrations');
-        }
-        // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 
     /**
@@ -57,9 +53,9 @@ class ApiAuthServiceProvider extends ServiceProvider
         $versionComparison = version_compare(app()->version(), '5.4.0');
 
         if ($versionComparison >= 0) {
-            $router->aliasMiddleware('auth.apikey', AuthorizeApiKey::class);
+            $router->aliasMiddleware('auth.apikey', AuthorizeApiKeyMiddleware::class);
         } else {
-            $router->middleware('auth.apikey', AuthorizeApiKey::class);
+            $router->middleware('auth.apikey', AuthorizeApiKeyMiddleware::class);
         }
     }
 }
