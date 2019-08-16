@@ -1,16 +1,12 @@
 <?php
 
-
 namespace ArcherZdip\LaravelApiAuth\Exceptions;
 
-
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response as FoundationResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Class UnauthorizedException
- *
- * @package App\Exceptions
+ * Class UnauthorizedException.
  */
 class UnauthorizedException extends HttpException
 {
@@ -23,7 +19,6 @@ class UnauthorizedException extends HttpException
      * @var string
      */
     protected $message = 'Unauthorized';
-
 
     public function __construct(string $message = null, \Throwable $previous = null, array $headers = [], ?int $code = 0)
     {

@@ -5,6 +5,7 @@ if (!function_exists('base64_urlsafe_encode')) {
      * Return the Base64-encoded version of $data, The alphabet uses '-' instead of '+' and '_' instead of '/'.
      *
      * @param $data
+     *
      * @return mixed
      */
     function base64_urlsafe_encode($data)
@@ -19,6 +20,7 @@ if (!function_exists('base64_urlsafe_decode')) {
      *
      * @param $data
      * @param null $strict
+     *
      * @return bool|string
      */
     function base64_urlsafe_decode($data, $strict = null)

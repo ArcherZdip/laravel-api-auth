@@ -2,12 +2,12 @@
 
 namespace ArcherZdip\LaravelApiAuth\Http\Middleware;
 
+use ArcherZdip\LaravelApiAuth\ApiAuth;
+use ArcherZdip\LaravelApiAuth\Exceptions\UnauthorizedException;
+use ArcherZdip\LaravelApiAuth\Models\ApiAuthAccessEvent;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use ArcherZdip\LaravelApiAuth\ApiAuth;
-use ArcherZdip\LaravelApiAuth\Models\ApiAuthAccessEvent;
-use ArcherZdip\LaravelApiAuth\Exceptions\UnauthorizedException;
 
 class AuthorizeApiKeyMiddleware
 {
@@ -17,7 +17,8 @@ class AuthorizeApiKeyMiddleware
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -29,13 +30,15 @@ class AuthorizeApiKeyMiddleware
 
         if (ApiAuth::isValid($token)) {
             $this->logAccessEvent($request, $token);
+
             return $next($request);
         }
+
         throw new UnauthorizedException();
     }
 
     /**
-     * Log an API KEY access event
+     * Log an API KEY access event.
      *
      * @param Request $request
      */
@@ -60,11 +63,10 @@ class AuthorizeApiKeyMiddleware
                 $this->logAccessEventForFile($attributes);
             }
         }
-
     }
 
     /**
-     * Log an access event for DB
+     * Log an access event for DB.
      *
      * @param array $attributes
      */
@@ -74,7 +76,7 @@ class AuthorizeApiKeyMiddleware
     }
 
     /**
-     * Log an access event for file
+     * Log an access event for file.
      *
      * @param array $attributes
      */

@@ -1,20 +1,19 @@
 <?php
 
-
 namespace ArcherZdip\LaravelApiAuth;
 
-use Exception;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
+use Exception;
 
 class ApiAuth
 {
     /**
-     * @var $token
+     * @var
      */
     protected $token;
 
     /**
-     * @var array $validKeys
+     * @var array
      */
     protected $validKeys = ['appid', 'token', 'exp'];
 
@@ -26,15 +25,17 @@ class ApiAuth
     }
 
     /**
-     * Check token is valid
+     * Check token is valid.
      *
      * @param string $token
+     *
      * @return bool
      */
     public static function isValid(string $token): bool
     {
         try {
             new static($token);
+
             return true;
         } catch (Exception $exception) {
             return false;
@@ -42,9 +43,10 @@ class ApiAuth
     }
 
     /**
-     * Get Appid by token
+     * Get Appid by token.
      *
      * @param string $token
+     *
      * @return string
      */
     public static function getAppId(string $token): string
@@ -53,12 +55,14 @@ class ApiAuth
     }
 
     /**
-     * Generate token, for test token is valid
+     * Generate token, for test token is valid.
      *
-     * @param string $appid
+     * @param string   $appid
      * @param int|null $exp
-     * @return string
+     *
      * @throws Exception
+     *
+     * @return string
      */
     public static function generateToken(string $appid, int $exp = null): string
     {
@@ -68,36 +72,39 @@ class ApiAuth
 
         $appClient = AppClient::getSecretByAppId($appid);
         if ($appClient->count() === 0) {
-            throw new Exception("The AppId is not exists");
+            throw new Exception('The AppId is not exists');
         }
         $secret = $appClient->secret;
-        $sign = sha1($appid . $secret . $exp);
+        $sign = sha1($appid.$secret.$exp);
 
         return base64_urlsafe_encode(implode('.', [$appid, $sign, $exp]));
     }
 
     /**
-     * Check appid
+     * Check appid.
      *
      * @param string $appid
-     * @return AppClient $appClient
+     *
      * @throws Exception
+     *
+     * @return AppClient $appClient
      */
     protected function checkAppId(string $appid): ?AppClient
     {
         $appClient = AppClient::getSecretByAppId($appid);
         if ($appClient->count() === 0) {
-            throw new Exception("The AppId is not exists");
+            throw new Exception('The AppId is not exists');
         }
 
         return $appClient;
     }
 
     /**
-     * verify sign
+     * verify sign.
+     *
+     * @throws Exception
      *
      * @return null
-     * @throws Exception
      */
     protected function verifySign()
     {
@@ -106,30 +113,33 @@ class ApiAuth
         if ($this->createSign($appid, $exp) !== $sign) {
             throw new Exception('Token is error.');
         }
-
-        return null;
     }
 
     /**
-     * create sign
+     * create sign.
      *
      * @param string $appid
-     * @param int $exp
-     * @return string
+     * @param int    $exp
+     *
      * @throws Exception
+     *
+     * @return string
      */
     protected function createSign(string $appid, int $exp): string
     {
         $secret = $this->checkAppId($appid)->secret;
-        return sha1($appid . $secret . $exp);
+
+        return sha1($appid.$secret.$exp);
     }
 
     /**
-     * Token decode
+     * Token decode.
      *
      * @param string $token
-     * @return array|null
+     *
      * @throws Exception
+     *
+     * @return array|null
      */
     protected function tokenDecode(string $token): ?array
     {

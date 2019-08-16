@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ArcherZdip\LaravelApiAuth\Models;
-
 
 use Illuminate\Database\Eloquent\Model;
 

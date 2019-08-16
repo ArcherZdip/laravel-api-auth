@@ -1,27 +1,25 @@
 <?php
 
-
 namespace ArcherZdip\LaravelApiAuth\Test;
 
-
-use Faker\Factory;
-use PHPUnit\Framework\TestCase;
 use ArcherZdip\LaravelApiAuth\ApiAuth;
-use Illuminate\Support\Facades\Artisan;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
+use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\TestCase;
 
 class ApiAuthTest extends TestCase
 {
     use DatabaseTransactions;
 
     /**
-     * @var string $name
+     * @var string
      */
     protected $name;
 
     /**
-     * @var AppClient $appClient
+     * @var AppClient
      */
     protected $appClient;
 
@@ -32,14 +30,14 @@ class ApiAuthTest extends TestCase
         $this->name = Factory::create()->md5;
 
         Artisan::call('apikey:generate', [
-            'name' => $this->name
+            'name' => $this->name,
         ]);
 
         $this->appClient = AppClient::where('name', '=', $this->name)->first();
     }
 
     /**
-     * test genereate token
+     * test genereate token.
      *
      * @throws \Exception
      */
@@ -52,7 +50,7 @@ class ApiAuthTest extends TestCase
     }
 
     /**
-     * test get appid
+     * test get appid.
      *
      * @throws \Exception
      */
@@ -66,14 +64,14 @@ class ApiAuthTest extends TestCase
     }
 
     /**
-     * test token is valid
+     * test token is valid.
      *
      * @throws \Exception
      */
     public function test_token_is_valid()
     {
         $succToken = $this->getGenerateToken();
-        $failToken =  '123456';
+        $failToken = '123456';
 
         echo $succToken;
 
@@ -83,10 +81,11 @@ class ApiAuthTest extends TestCase
     }
 
     /**
-     * Get token for test
+     * Get token for test.
+     *
+     * @throws \Exception
      *
      * @return string
-     * @throws \Exception
      */
     private function getGenerateToken()
     {

@@ -2,18 +2,18 @@
 
 namespace ArcherZdip\LaravelApiAuth\Console\Commands;
 
-use Illuminate\Support\Arr;
-use Illuminate\Console\Command;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
+use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 
 class PutAppAuth extends Command
 {
     /**
-     * Error message
+     * Error message.
      */
-    const MESSAGE_ERROR_PARAMS_MANY = "The put params is to many. There can only be one condition";
+    const MESSAGE_ERROR_PARAMS_MANY = 'The put params is to many. There can only be one condition';
     const MESSAGE_ERROR_APPID_DOES_NOT_EXIST = 'AppId does not exist.';
-    const MESSAGE_ERROR_APP_TRASHED = "This app has trashed";
+    const MESSAGE_ERROR_APP_TRASHED = 'This app has trashed';
 
     /**
      * The name and signature of the console command.
@@ -46,8 +46,9 @@ class PutAppAuth extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function handle()
     {
@@ -78,30 +79,28 @@ class PutAppAuth extends Command
         if (Arr::has($options, 'activate')) {
             // activate app
             if ($appClient->active) {
-                $this->info('App "' . $name . '" is already active');
+                $this->info('App "'.$name.'" is already active');
                 die();
             }
             $appClient->active = AppClient::ACTIVATE;
             $appClient->save();
             $this->info("Activate app succ, name: {$name}");
-
         } elseif (Arr::has($options, 'deactivate')) {
             // deactivate app
             if (!$appClient->active) {
-                $this->info('App "' . $name . '" is already deactivate');
+                $this->info('App "'.$name.'" is already deactivate');
                 die();
             }
             $appClient->active = AppClient::DEACTIVATE;
             $appClient->save();
             $this->info("Deactivate app succ, name: {$name}");
-
         } elseif (Arr::has($options, 'delete')) {
             // delete app
             $confirmMessage = "Are you sure you want to delete AppId:{$appid}, name:{$name} ?";
 
             if ($this->confirm($confirmMessage)) {
                 $appClient->delete();
-                $this->info('Deleted app succ, name: ' . $name);
+                $this->info('Deleted app succ, name: '.$name);
             }
             die();
         } elseif (Arr::has($options, 'refresh')) {
@@ -111,7 +110,7 @@ class PutAppAuth extends Command
             if ($this->confirm($confirmMessage)) {
                 $appClient->secret = AppClient::generateSecret();
                 $appClient->save();
-                $this->info('Refresh app secret succ, name: ' . $name);
+                $this->info('Refresh app secret succ, name: '.$name);
             } else {
                 die();
             }
@@ -127,16 +126,17 @@ class PutAppAuth extends Command
             $appClient->appid,
             $appClient->secret,
             $status,
-            $appClient->created_at
+            $appClient->created_at,
         ]];
 
         $this->table($headers, $rows);
     }
 
     /**
-     * Validate AppId
+     * Validate AppId.
      *
      * @param $appId
+     *
      * @return mixed
      */
     protected function validateAppId(string $appId): AppClient

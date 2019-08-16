@@ -2,11 +2,11 @@
 
 namespace ArcherZdip\LaravelApiAuth\Providers;
 
+use ArcherZdip\LaravelApiAuth\Console\Commands\GenerateAppAuth;
+use ArcherZdip\LaravelApiAuth\Console\Commands\ListAppAuth;
+use ArcherZdip\LaravelApiAuth\Console\Commands\PutAppAuth;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use ArcherZdip\LaravelApiAuth\Console\Commands\PutAppAuth;
-use ArcherZdip\LaravelApiAuth\Console\Commands\ListAppAuth;
-use ArcherZdip\LaravelApiAuth\Console\Commands\GenerateAppAuth;
 
 class ApiAuthServiceProvider extends ServiceProvider
 {
@@ -17,13 +17,13 @@ class ApiAuthServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        if( function_exists('config_path') ) {
+        if (function_exists('config_path')) {
             $this->publishes([
-                __DIR__ . '/../config/apikey.php' => config_path('apikey.php'),
+                __DIR__.'/../config/apikey.php' => config_path('apikey.php'),
             ], 'config');
         }
         $this->registerMiddleware($router);
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 
     /**
@@ -41,7 +41,7 @@ class ApiAuthServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register middleware
+     * Register middleware.
      *
      * Support added for different Laravel versions
      *

@@ -2,18 +2,18 @@
 
 namespace ArcherZdip\LaravelApiAuth\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class AppClient extends Model
 {
     use SoftDeletes;
 
-    const EVENT_NAME_CREATED     = 'created';
-    const EVENT_NAME_ACTIVATED   = 'activated';
+    const EVENT_NAME_CREATED = 'created';
+    const EVENT_NAME_ACTIVATED = 'activated';
     const EVENT_NAME_DEACTIVATED = 'deactivated';
-    const EVENT_NAME_DELETED     = 'deleted';
+    const EVENT_NAME_DELETED = 'deleted';
 
     /** @var int activate status */
     const ACTIVATE = 1;
@@ -33,7 +33,7 @@ class AppClient extends Model
         'name',
         'appid',
         'secret',
-        'active'
+        'active',
     ];
 
     /**
@@ -47,12 +47,11 @@ class AppClient extends Model
     {
         parent::boot();
 
-        static::created(function(AppClient $appClient) {
+        static::created(function (self $appClient) {
             self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_CREATED);
         });
 
-        static::updated(function(AppClient $appClient) {
-
+        static::updated(function (self $appClient) {
             $changed = $appClient->getDirty();
 
             if (isset($changed) && $changed['active'] === self::ACTIVATE) {
@@ -62,31 +61,30 @@ class AppClient extends Model
             if (isset($changed) && $changed['active'] === self::DEACTIVATE) {
                 self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_DEACTIVATED);
             }
-
         });
 
-        static::deleted(function(AppClient $appClient) {
+        static::deleted(function (self $appClient) {
             self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_DELETED);
         });
-
     }
 
     /**
-     * Get secret by appid
+     * Get secret by appid.
      *
      * @param $appid
+     *
      * @return mixed
      */
     public static function getSecretByAppId($appid)
     {
         return self::where([
             'active' => self::ACTIVATE,
-            'appid'  => $appid
+            'appid'  => $appid,
         ])->first();
     }
 
     /**
-     * Generate AppId
+     * Generate AppId.
      *
      * @return string
      */
@@ -100,7 +98,7 @@ class AppClient extends Model
     }
 
     /**
-     * Generate secret
+     * Generate secret.
      *
      * @return string
      */
@@ -110,20 +108,22 @@ class AppClient extends Model
     }
 
     /**
-     * Check name is valid format
+     * Check name is valid format.
      *
      * @param $name
+     *
      * @return bool
      */
     public static function isValidName($name)
     {
-        return (bool)preg_match(self::$nameRegex, $name);
+        return (bool) preg_match(self::$nameRegex, $name);
     }
 
     /**
-     * Check name is or not exists
+     * Check name is or not exists.
      *
      * @param $name
+     *
      * @return bool
      */
     public static function nameExists($name)
@@ -132,9 +132,10 @@ class AppClient extends Model
     }
 
     /**
-     * Check AppId is or not exists
+     * Check AppId is or not exists.
      *
      * @param $secret
+     *
      * @return bool
      */
     public static function appIdExists($appId)
@@ -143,12 +144,12 @@ class AppClient extends Model
     }
 
     /**
-     * Log an app oprate admin event
+     * Log an app oprate admin event.
      *
      * @param AppClient $appClient
-     * @param string $eventName
+     * @param string    $eventName
      */
-    protected static function logApiAuthOprateEvent(AppClient $appClient, $eventName)
+    protected static function logApiAuthOprateEvent(self $appClient, $eventName)
     {
         $event = new ApiAuthOprateEvent();
         $event->app_client_id = $appClient->id;

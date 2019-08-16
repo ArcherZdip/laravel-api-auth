@@ -19,7 +19,7 @@ class ListAppAuth extends Command
      *
      * @var string
      */
-    protected $description = "List all AppId and Secret";
+    protected $description = 'List all AppId and Secret';
 
     /**
      * Create a new command instance.
@@ -58,7 +58,7 @@ class ListAppAuth extends Command
                 $list->appid,
                 $list->secret,
                 $status,
-                $list->created_at
+                $list->created_at,
             ];
         });
 

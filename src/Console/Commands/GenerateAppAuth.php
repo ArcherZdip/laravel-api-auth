@@ -2,13 +2,13 @@
 
 namespace ArcherZdip\LaravelApiAuth\Console\Commands;
 
-use Illuminate\Console\Command;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
+use Illuminate\Console\Command;
 
 class GenerateAppAuth extends Command
 {
     /**
-     * Error messages
+     * Error messages.
      */
     const MESSAGE_ERROR_INVALID_NAME_FORMAT = 'Invalid name.  Must be a lowercase alphabetic characters, numbers and hyphens less than 255 characters long.';
     const MESSAGE_ERROR_NAME_ALREADY_USED = 'Name is unavailable.';
@@ -24,7 +24,7 @@ class GenerateAppAuth extends Command
      *
      * @var string
      */
-    protected $description = "Generate a new appId";
+    protected $description = 'Generate a new appId';
 
     /**
      * Create a new command instance.
@@ -61,9 +61,10 @@ class GenerateAppAuth extends Command
     }
 
     /**
-     * validate name
+     * validate name.
      *
      * @param string $name
+     *
      * @return null
      */
     protected function validateName(string $name)
@@ -77,7 +78,5 @@ class GenerateAppAuth extends Command
             $this->error(self::MESSAGE_ERROR_NAME_ALREADY_USED);
             die();
         }
-
-        return null;
     }
 }
