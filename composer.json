@@ -25,10 +25,7 @@
         }
     },
     "require": {
-        "php": ">=7.1",
-        "laravel/framework": "5.5.*",
-        "illuminate/support": ">=5.0.0",
-        "illuminate/console": ">=5.0.0"
+        "php": ">=7.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"

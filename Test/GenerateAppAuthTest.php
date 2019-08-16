@@ -4,9 +4,8 @@
 namespace ArcherZdip\LaravelApiAuth\Test;
 
 
-use Faker\Factory;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Artisan;
+
+use PHPUnit\Framework\TestCase;
 
 class GenerateAppAuthTest extends TestCase
 {
