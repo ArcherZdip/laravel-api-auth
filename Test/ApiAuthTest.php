@@ -73,7 +73,7 @@ class ApiAuthTest extends TestCase
     public function test_token_is_valid()
     {
         $succToken = $this->getGenerateToken();
-        $failToken =  '123456';
+        $failToken = '123456';
 
         echo $succToken;
 

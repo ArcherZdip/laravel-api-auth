@@ -1,0 +1,22 @@
+tools:
+  php_mess_detector: true
+  php_code_sniffer: true
+  sensiolabs_security_checker: true
+  php_pdepend: true
+  php_loc:
+    enabled: true
+    excluded_dirs: [vendor, Test]
+filter:
+  excluded_paths:
+    - 'Test/*'
+build:
+  environment:
+    php:
+      version: 7.1.0
+  tests:
+    override:
+      -
+        command: phpunit --coverage-clover=translug-coverage-file
+        coverage:
+          file: translug-coverage-file
+          format: clover
