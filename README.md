@@ -149,7 +149,16 @@ class UserController extends Controller
 
 In order to pass the `auth.apikey` middleware, requests must include an `Authorization` header as part of the request, with its value being an active API key.
 
-    Authorization: VApUyoTm5I5DtlQAJjJbmCbrdceFsVCb6H3CpsL4SdUlgGdUui8WjxwbcejAfmL7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    Authorization: VApUyoTm5I5DtlQAJjJbmCbrdceFsVCb6H3CpsL4SdUlgGdUui8WjxwbcejAfmL7  
+
+or `token={token}`       
+
+Token generate regulation.  
+```php
+sign = sha1(appid . secret . exp) // exp = time()
+token = base64_encode(implode('.', [appid, sign, exp])
+```
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 ## Event history
 Any time an API key is generated, activated, deactivated, or deleted, a record is logged in the `api_auth_oprate_event` table.  Each record contains the following information:
 * app_client_id
@@ -169,7 +178,8 @@ Database infomation:
 * type
 
 ## TODO
-Configuration exception and return format.
+- Configuration exception and return format.
+- Configuration way of encryption.
 
 ## License
 MIT license
