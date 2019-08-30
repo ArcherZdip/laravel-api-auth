@@ -4,6 +4,7 @@
 namespace ArcherZdip\LaravelApiAuth;
 
 use Exception;
+use Carbon\CarbonImmutable;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
 
 class ApiAuth
@@ -103,6 +104,13 @@ class ApiAuth
     {
         [$appid, $sign, $exp] = $this->tokenDecode($this->token);
 
+        // check timeout
+        $now = CarbonImmutable::now()->timestamp;
+        $tokenTimeout = (int)config('apikey.token_timeout', 0);
+        if ($tokenTimeout !== 0 && $exp + $tokenTimeout > $now) {
+            throw new Exception('Token is timeout.');
+        }
+
         if ($this->createSign($appid, $exp) !== $sign) {
             throw new Exception('Token is error.');
         }
@@ -121,7 +129,7 @@ class ApiAuth
     protected function createSign(string $appid, int $exp): string
     {
         $secret = $this->checkAppId($appid)->secret;
-        return sha1($appid . $secret . (string) $exp);
+        return sha1($appid . $secret . (string)$exp);
     }
 
     /**

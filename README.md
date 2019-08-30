@@ -2,6 +2,7 @@
 
 [![star this repo](http://githubbadges.com/star.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth)
 [![fork this repo](http://githubbadges.com/fork.svg?user=ArcherZdip&repo=laravel-api-auth&style=default)](https://github.com/ArcherZdip/laravel-api-auth/fork)
+![Packagist](https://img.shields.io/packagist/dt/archerzdip/laravel-api-auth)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ArcherZdip/laravel-api-auth/build-status/master)
@@ -178,7 +179,6 @@ Database infomation:
 * type
 
 ## TODO
-- Configuration exception and return format.
 - Configuration way of encryption.
 
 ## License
