@@ -4,7 +4,7 @@
 namespace ArcherZdip\LaravelApiAuth;
 
 use Exception;
-use Carbon\CarbonImmutable;
+use Carbon\Carbon;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
 
 class ApiAuth
@@ -105,7 +105,7 @@ class ApiAuth
         [$appid, $sign, $exp] = $this->tokenDecode($this->token);
 
         // check timeout
-        $now = CarbonImmutable::now()->timestamp;
+        $now = Carbon::now()->timestamp;
         $tokenTimeout = (int)config('apikey.token_timeout', 0);
         if ($tokenTimeout !== 0 && $exp + $tokenTimeout > $now) {
             throw new Exception('Token is timeout.');
