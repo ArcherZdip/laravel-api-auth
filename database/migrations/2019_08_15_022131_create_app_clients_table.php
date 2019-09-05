@@ -14,7 +14,9 @@ class CreateAppClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_clients', function (Blueprint $table) {
+        $tableName = config('apikey.table_name.app_clients');
+
+        Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment('AppName');
             $table->string('appid')->comment('Appid');
@@ -26,7 +28,7 @@ class CreateAppClientsTable extends Migration
             $table->index('secret');
         });
 
-        DB::statement("ALTER TABLE `app_clients` comment 'AppClients'");
+        DB::statement("ALTER TABLE `{$tableName}` comment 'AppClients'");
     }
 
     /**
@@ -36,6 +38,8 @@ class CreateAppClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_clients');
+        $tableName = config('apikey.table_name.app_clients');
+
+        Schema::dropIfExists($tableName);
     }
 }

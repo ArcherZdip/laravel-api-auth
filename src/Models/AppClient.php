@@ -21,9 +21,6 @@ class AppClient extends Model
 
     protected static $nameRegex = '/^[a-z0-9-]{1,255}$/';
 
-    /** @var string $table */
-    protected $table = 'app_clients';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -69,6 +66,17 @@ class AppClient extends Model
             self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_DELETED);
         });
 
+    }
+
+    /**
+     * AppClient constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('apikey.table_name.app_clients'));
     }
 
     /**

@@ -14,7 +14,9 @@ class CreateApiAuthOprateEventTable extends Migration
      */
     public function up()
     {
-        Schema::create('api_auth_oprate_events', function (Blueprint $table) {
+        $tableName = config('apikey.table_name.api_auth_oprate_events');
+
+        Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('app_client_id');
             $table->ipAddress('ip_address');
@@ -22,7 +24,7 @@ class CreateApiAuthOprateEventTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `api_auth_oprate_events` comment 'Admin oprate events'");
+        DB::statement("ALTER TABLE `{$tableName}` comment 'Admin oprate events'");
     }
 
     /**
@@ -32,6 +34,8 @@ class CreateApiAuthOprateEventTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('api_auth_oprate_events');
+        $tableName = config('apikey.table_name.api_auth_oprate_events');
+
+        Schema::dropIfExists($tableName);
     }
 }

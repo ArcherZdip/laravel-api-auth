@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApiAuthAccessEvent extends Model
 {
-    /** @var string $table */
-    protected $table = 'api_auth_access_events';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -35,4 +32,14 @@ class ApiAuthAccessEvent extends Model
         'params' => 'array'
     ];
 
+    /**
+     * ApiAuthAccessEvent constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('apikey.table_name.api_auth_access_events'));
+    }
 }

@@ -6,6 +6,8 @@ namespace ArcherZdip\LaravelApiAuth;
 use Exception;
 use Carbon\Carbon;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
+use function ArcherZdip\LaravelApiAuth\Helper\base64_urlsafe_decode;
+use function ArcherZdip\LaravelApiAuth\Helper\base64_urlsafe_encode;
 
 class ApiAuth
 {

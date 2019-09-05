@@ -10,9 +10,6 @@ class ApiAuthOprateEvent extends Model
 {
     protected static $nameRegex = '/^[a-z0-9-]{1,255}$/';
 
-    /** @var string $table */
-    protected $table = 'api_auth_oprate_events';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -30,4 +27,15 @@ class ApiAuthOprateEvent extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * ApiAuthOprateEvent constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('apikey.table_name.api_auth_oprate_events'));
+    }
 }

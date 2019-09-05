@@ -14,7 +14,9 @@ class CreateApiAuthAccessEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('api_auth_access_events', function (Blueprint $table) {
+        $tableName = config('apikey.table_name.api_auth_access_events');
+
+        Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('appid')->comment('Appid');
             $table->ipAddress('ip_address')->comment('IP');
@@ -24,7 +26,7 @@ class CreateApiAuthAccessEventsTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `api_auth_access_events` comment 'Api Access Logs'");
+        DB::statement("ALTER TABLE `{$tableName}` comment 'Api Access Logs'");
     }
 
     /**
@@ -34,6 +36,8 @@ class CreateApiAuthAccessEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('api_auth_access_events');
+        $tableName = config('apikey.table_name.api_auth_access_events');
+
+        Schema::dropIfExists($tableName);
     }
 }
