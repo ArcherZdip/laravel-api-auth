@@ -51,7 +51,7 @@ return [
         /**
          * APP clients table
          */
-        'app_clients'            => env('APP_CLIENTS_NAME', 'app_clients'),
+        'app_clients'            => env('APP_CLIENTS_NAME', 'api_auth_app_clients'),
         /**
          * api_auth access events table
          */
