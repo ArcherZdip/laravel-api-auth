@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppClientsTable extends Migration
+class CreateArcherZdipAppClientsTable extends Migration
 {
     /**
      * Run the migrations.

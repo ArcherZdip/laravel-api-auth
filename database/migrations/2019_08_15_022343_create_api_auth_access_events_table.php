@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApiAuthAccessEventsTable extends Migration
+class CreateArcherZdipApiAuthAccessEventsTable extends Migration
 {
     /**
      * Run the migrations.
