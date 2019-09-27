@@ -56,7 +56,12 @@ class GenerateAppAuth extends Command
         /** @var AppClient $appClient */
         $appClient = AppClient::forceCreate($attributes);
         $headers = ['AppName', 'appId', 'secret', 'CreateAt'];
-        $rows = array_values($appClient->only(['name', 'appid', 'secret', 'created_at']));
+        $rows = [
+            $appClient->name,
+            $appClient->appid,
+            $appClient->secret,
+            $appClient->created_at
+        ];
         $this->table($headers, [$rows]);
     }
 

@@ -14,6 +14,8 @@ Run `composer require archerzdip/laravel-api-auth`.
 Publish the migration files
 
     $ php artisan vendor:publish
+    # Or...
+    $ php artisan vendor:publish --provider="ArcherZdip\LaravelApiAuth\Providers\ApiAuthServiceProvider"
 
 Run the migrations
 
