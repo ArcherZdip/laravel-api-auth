@@ -32,6 +32,7 @@ return [
     |--------------------------------------------------------------------------
     | Logger Setting
     |--------------------------------------------------------------------------
+    |
     | Available Drivers: "datebase", "file"
     |
     */
@@ -42,22 +43,38 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cache Setting
+    |--------------------------------------------------------------------------
+    |
+    | Cache Setting.
+    |
+    */
+    'cache'         => [
+        'is_taken'  => env('API_KEY_CACHE', false),
+        'cache_key' => env('API_KEY_CACHE_KEY', 'apikey:clients:'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Table Name
     |--------------------------------------------------------------------------
+    |
     | Table Name, if this tablename exists can change.
     |
     */
     'table_name'    => [
         /**
-         * APP clients table
+         * APP clients table name
          */
         'app_clients'            => env('APP_CLIENTS_NAME', 'api_auth_app_clients'),
+
         /**
-         * api_auth access events table
+         * Api_auth access events table name
          */
         'api_auth_access_events' => env('API_AUTH_ACCESS_EVENTS_NAME', 'api_auth_access_events'),
+
         /**
-         * api_auth oprate events table
+         * Api_auth oprate events table name
          */
         'api_auth_oprate_events' => env('API_AUTH_OPRATE_EVENTS_NAME', 'api_auth_oprate_events'),
     ],

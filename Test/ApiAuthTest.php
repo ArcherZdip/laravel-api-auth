@@ -5,11 +5,11 @@ namespace ArcherZdip\LaravelApiAuth\Test;
 
 
 use Faker\Factory;
-use PHPUnit\Framework\TestCase;
 use ArcherZdip\LaravelApiAuth\ApiAuth;
 use Illuminate\Support\Facades\Artisan;
 use ArcherZdip\LaravelApiAuth\Models\AppClient;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class ApiAuthTest extends TestCase
 {

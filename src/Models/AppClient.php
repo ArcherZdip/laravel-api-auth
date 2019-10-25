@@ -3,6 +3,7 @@
 namespace ArcherZdip\LaravelApiAuth\Models;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -60,10 +61,15 @@ class AppClient extends Model
                 self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_DEACTIVATED);
             }
 
+            // flush cache
+            self::flushCache($appClient->name);
         });
 
         static::deleted(function(AppClient $appClient) {
             self::logApiAuthOprateEvent($appClient, self::EVENT_NAME_DELETED);
+
+            // flush cache
+            self::flushCache($appClient->name);
         });
 
     }
@@ -86,6 +92,24 @@ class AppClient extends Model
      * @return mixed
      */
     public static function getSecretByAppId($appid)
+    {
+        // cache false
+        if (!config('apikey.cache.is_taken', false)) {
+            return self::getValueById($appid);
+        }
+
+        return Cache::rememberForever(config('apikey.cache.cache_key', 'apikey:clients:') . $appid, function () use ($appid) {
+            return self::getValueById($appid);
+        });
+    }
+
+    /**
+     * Get model by appid
+     *
+     * @param $appid
+     * @return mixed
+     */
+    public static function getValueById($appid)
     {
         return self::where([
             'active' => self::ACTIVATE,
@@ -148,6 +172,16 @@ class AppClient extends Model
     public static function appIdExists($appId)
     {
         return self::where('appid', $appId)->withTrashed()->first() instanceof self;
+    }
+
+    /**
+     * Flush the key cache
+     *
+     * @param $cacheKey
+     */
+    public function flushCache($cacheKey)
+    {
+        Cache::forget($cacheKey);
     }
 
     /**
