@@ -54,7 +54,7 @@ class AuthorizeApiKeyMiddleware
                 'ip_address'    => $request->ip(),
                 'url'           => $request->fullUrl(),
                 'params'        => $request->all(),
-                'response_time' => (microtime(true) - $startTime) * 1000 . 'ms',
+                'response_time' => (microtime(true) - $startTime) * 1000,
                 'type'          => $request->method(),
             ];
 

@@ -16,7 +16,7 @@ class AddApiAuthAccessEventsResponseTimeColumn extends Migration
         $tableName = config('apikey.table_name.api_auth_access_events');
 
         Schema::table($tableName, function(Blueprint $table) {
-            $table->string('response_time')->default('')->comment('响应时间')->after('params');
+            $table->decimal('response_time', 8, 4)->default(0)->comment('响应时间')->after('params');
         });
     }
 
