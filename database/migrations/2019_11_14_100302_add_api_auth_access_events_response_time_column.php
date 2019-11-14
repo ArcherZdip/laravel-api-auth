@@ -15,7 +15,7 @@ class AddApiAuthAccessEventsResponseTimeColumn extends Migration
     {
         $tableName = config('apikey.table_name.api_auth_access_events');
 
-        Schema::create($tableName, function(Blueprint $table) {
+        Schema::table($tableName, function(Blueprint $table) {
             $table->string('response_time')->default('')->comment('响应时间')->after('params');
         });
     }
@@ -29,7 +29,7 @@ class AddApiAuthAccessEventsResponseTimeColumn extends Migration
     {
         $tableName = config('apikey.table_name.api_auth_access_events');
 
-        Schema::create($tableName, function(Blueprint $table) {
+        Schema::table($tableName, function(Blueprint $table) {
             $table->dropColumn('response_time');
         });
     }
