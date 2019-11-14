@@ -22,13 +22,16 @@ class AuthorizeApiKeyMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $start = microtime(true);
         $token = $request->header(self::AUTH_HEADER) ?? '';
         $urlToken = $request->input('token');
         $token = $urlToken ?: $token;
 
         if (ApiAuth::isValid($token)) {
-            $this->logAccessEvent($request, $token);
-            return $next($request);
+            $response = $next($request);
+            $this->logAccessEvent($request, $token, $start);
+
+            return $response;
         }
         throw new UnauthorizedException();
     }
@@ -37,19 +40,22 @@ class AuthorizeApiKeyMiddleware
      * Log an API KEY access event
      *
      * @param Request $request
+     * @param string $token
+     * @param $startTime
      */
-    protected function logAccessEvent(Request $request, string $token)
+    protected function logAccessEvent(Request $request, string $token, $startTime)
     {
         // Log access event
         if (config('apikey.logger.is_taken')) {
             $appid = ApiAuth::getAppId($token);
 
             $attributes = [
-                'appid'      => $appid,
-                'ip_address' => $request->ip(),
-                'url'        => $request->fullUrl(),
-                'params'     => json_encode($request->all()),
-                'type'       => $request->method(),
+                'appid'         => $appid,
+                'ip_address'    => $request->ip(),
+                'url'           => $request->fullUrl(),
+                'params'        => $request->all(),
+                'response_time' => (microtime(true) - $startTime) * 1000 . 'ms',
+                'type'          => $request->method(),
             ];
 
             // database
