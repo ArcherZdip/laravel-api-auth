@@ -18,6 +18,7 @@ class ApiAuthAccessEvent extends Model
         'ip_address',
         'url',
         'params',
+        'response_time',
         'type',
     ];
 
