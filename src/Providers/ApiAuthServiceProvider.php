@@ -18,13 +18,19 @@ class ApiAuthServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        if( function_exists('config_path') ) {
+        if (function_exists('config_path')) {
             $this->publishes([
                 __DIR__ . '/../config/apikey.php' => config_path('apikey.php'),
             ], 'config');
         }
+
+        if (function_exists('database_path')) {
+            $this->publishes([
+                __DIR__ . '/../../database/migrations/' => database_path('/migrations')
+            ]);
+        }
+
         $this->registerMiddleware($router);
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 
     /**
